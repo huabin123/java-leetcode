@@ -7,7 +7,7 @@ package com.huabin.algorithm.primary;
  */
 public class Code02_BubbleSort {
 
-    private static int[] sort(int[] array){
+    public static int[] sort(int[] array){
         // 处理边界条件
         if (array.length == 0 || array.length == 1) {
             return array;
@@ -22,7 +22,7 @@ public class Code02_BubbleSort {
         return array;
     }
 
-    private static void swap(int[] arr, int i, int j){
+    public static void swap(int[] arr, int i, int j){
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
