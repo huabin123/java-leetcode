@@ -15,7 +15,7 @@ public class Code04_duishuqi {
      * @param maxLen 数组最大长度
      * @Return int[]
      */
-    private static int[] genRandomArr(int maxNum, int maxLen) {
+    public static int[] genRandomArr(int maxNum, int maxLen) {
         int len = (int) (Math.random() * maxLen);
         int[] ints = new int[len];
         for (int i = 0; i < len; i++) {
@@ -24,7 +24,7 @@ public class Code04_duishuqi {
         return ints;
     }
 
-    private static int[] copyArray(int[] arr){
+    public static int[] copyArray(int[] arr){
         int[] ans = new int[arr.length];
         for (int i = 0; i < arr.length; i++) {
             ans[i] = arr[i];
@@ -39,7 +39,7 @@ public class Code04_duishuqi {
      * @param arr
      * @Return boolean
      */
-    private static boolean isSortedArray(int[] arr){
+    public static boolean isSortedArray(int[] arr){
         if (arr.length == 0) {
             return true;
         }
