@@ -12,8 +12,8 @@ public class Code02_BubbleSort {
         if (array.length == 0 || array.length == 1) {
             return array;
         }
-        for (int j = 0; j < array.length; j++) {
-            for (int i = 0; i < array.length-j-1; i++) {
+        for (int j = 0; j < array.length; j++) {  // 第一层循环每循环一次就能确定一个最大的数
+            for (int i = 0; i < array.length-j-1; i++) {  // 除去已经排完序的数字就是第二层循环的范围
                 if (array[i]>array[i+1]) {
                     swap(array, i, i+1);
                 }

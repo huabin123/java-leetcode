@@ -13,7 +13,7 @@ public class Code01_SelectionSort {
             int minNum = array[i];
             for(int j=i+1; j< array.length; j++){
                 if (array[j]<minNum){
-                    minNum = array[j];
+                    minNum = array[j];  // 小的数往前放
                     swap(array, i, j);
                 }
             }
