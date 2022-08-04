@@ -5,7 +5,7 @@ package com.huabin.algorithm.primary;
  * @DateTime 2022-07-31 22:15
  * @Desc 排序算法复习
  */
-public class SortReview {
+public class Code16_SortReview {
 
     // 冒泡
     private static void sortBubble(int[] nums){
