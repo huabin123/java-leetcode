@@ -1,0 +1,94 @@
+> **本题代码**：[https://github.com/doubleZ0108/Leetcode/blob/master/17.%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88.py](https://github.com/doubleZ0108/Leetcode/blob/master/17.%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88.py)
+
+- **解法1**(T89% S75%): 维护一个队列，把适量的第一个数字对应的字母一个个的入队，再一个一个出队和第二个数字对应的字母一个个的合并再入队
+  - 看似简单，但核心是“适量”是多少？比如“27”，总共结果应该有3*4=12个，所以首先把4个a、4个b、4个c入队，然后再出队4个a，后面依次放上pqrs再入队…；所以要维护之前所有的数量(total_before)，即应该出队多少个
+
+  我们来看237这个🌰
+
+  1. 首先计算结果总数 3*3*4=36个
+  2. 循环1: 把3*4个a、3*4个b、3*4个c分别入队
+  3. 循环2: 对于total_before=3个字母(a b c)，对于我的3个字母def，分别取出并组合4份
+  4. 循环3: 对于total_before=3*3=9个组合(ad ae af bd...)，对于我的四个字母pqrs，分别取出并组合1份
+- ✨**解法2**(T65% S41%): 用树存储，深度优先搜索
+
+  - 对level0的每个字母循环，每次迭代设置一个buffer，深入一条树枝时把路上所有字母放进去，当到达叶子时将buffer中字符合并得到一条完整的组合，清空buffer，继续迭代
+
+    ![笔记 2022年3月6日.png](https://pic.leetcode-cn.com/1660547620-sidYdI-%E7%AC%94%E8%AE%B0%202022%E5%B9%B43%E6%9C%886%E6%97%A5.png)
+
+    * python
+
+    ```python
+    tmp = []
+    ans = []
+    def dfs(level):
+        if level == len(digits):
+            ans.append("".join(tmp))
+        else:
+            for l in phone[int(digits[level])]:
+                tmp.append(l)
+                dfs(level + 1)
+                tmp.pop()
+    
+    dfs(0)
+    return ans
+    ```
+- **解法3**: 全排列，结果字符串数组和下一个字符数组的全排列
+- **解法4**: 递归，先把后面的准备好，然后枚举当前字母，拼起来返回
+
+* python
+
+```python
+class Solution(object):
+    def letterCombinations(self, digits):
+        """
+        :type digits: str
+        :rtype: List[str]
+        """
+        phone = ["", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
+        alphas = []
+        total = 1
+        for digit in digits:
+            letters = phone[int(digit)-1]
+            alphas.append(letters)
+            total *= len(letters)
+
+        queue = []
+
+        for i in range(len(alphas)):
+            total_before = 1
+            for k in range(i-1, -1, -1):
+                total_before *= len(alphas[k])
+
+            for _ in range(total_before):
+                for letter in alphas[i]:
+                    for _ in range(total // len(alphas[i])):
+                        if i == 0:
+                            queue.append(letter)
+                        else:
+                            queue.append(queue.pop(0)+letter)
+            total //= len(alphas[i])
+
+        return queue
+
+    def otherSolution(self, digits):
+        # 解法2 深搜
+        if not digits:
+            return []
+
+        phone = ["", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
+
+        tmp = []
+        ans = []
+        def dfs(level):
+            if level == len(digits):
+                ans.append("".join(tmp))
+            else:
+                for l in phone[int(digits[level])]:
+                    tmp.append(l)
+                    dfs(level + 1)
+                    tmp.pop()
+
+        dfs(0)
+        return ans
+```
+

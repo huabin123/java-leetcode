@@ -1,0 +1,71 @@
+### 解题思路
+
+用回溯算法可以解决此问题。
+
+需要注意整体的组合仍是按顺序的，是数字定义的顺序。
+
+要这么理解，解决这个问题需要 $n$ 步，$n = len(digits)$，也即是输入字串的长度。每一步有3到4个选择，也即是每个数字对应的字符集合。
+
+对于每个字符选择，向后递归，当到了 $n$ 步后，就得到了一个组合，添加以结果列表中即可。
+
+唯一要小心的就是7和9对应4个字符，其余都是3个。
+
+### 代码
+
+* java
+
+```java
+class Solution {
+    private List<String> result;
+
+    public List<String> letterCombinations(String digits) {
+        result = new LinkedList<>();
+
+        if (digits == null || digits.length() == 0) {
+            return result;
+        }
+
+        combine(digits, 0, "");
+
+        return result;
+    }
+
+    private void combine(String digits, int index, String set) {
+        if (index == digits.length()) {
+            result.add(set);
+        } else if (index < digits.length()) {
+            Character[] keys = map(digits.charAt(index));
+            combine(digits, index + 1, set + keys[0]);
+            combine(digits, index + 1, set + keys[1]);
+            combine(digits, index + 1, set + keys[2]);
+            if (keys.length > 3) {
+                combine(digits, index + 1, set + keys[3]);
+            }
+        }
+    }
+
+    private Character[] map(Character ch) {
+        switch (ch) {
+        case '2':
+            return new Character[] {'a', 'b', 'c'};
+        case '3':
+            return new Character[] {'d', 'e', 'f'};
+        case '4':
+            return new Character[] {'g', 'h', 'i'};
+        case '5':
+            return new Character[] {'j', 'k', 'l'};
+        case '6':
+            return new Character[] {'m', 'n', 'o'};
+        case '7':
+            return new Character[] {'p', 'q', 'r', 's'};
+        case '8':
+            return new Character[] {'t', 'u', 'v'};
+        case '9':
+            return new Character[] {'w', 'x', 'y', 'z'};
+        }
+
+        return new Character[] {};
+    }
+}
+```
+
