@@ -38,11 +38,11 @@
 package com.huabin.lcof.leetcode.editor.cn;
 
 
-public class ErWeiShuZuZhongDeChaZhaoLcof{
+public class ErWeiShuZuZhongDeChaZhaoLcof {
 
     public static void main(String[] args) {
         Solution solution = new ErWeiShuZuZhongDeChaZhaoLcof().new Solution();
-        int[][] matrix = {{1,4,7, 11,15},{2,5,8,12,19},{3,6,9,16,22}};
+        int[][] matrix = {{1, 4, 7, 11, 15}, {2, 5, 8, 12, 19}, {3, 6, 9, 16, 22}};
         boolean numberIn2DArray = solution.findNumberIn2DArray(matrix, 19);
         System.out.println(numberIn2DArray);
     }
@@ -50,8 +50,40 @@ public class ErWeiShuZuZhongDeChaZhaoLcof{
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean findNumberIn2DArray(int[][] matrix, int target) {
+            // 暴力破解法
+//            for (int[] array : matrix) {
+//                for (int i : array) {
+//                    if (target == i) {
+//                        return true;
+//                    }
+//                }
+//            }
+//            return false;
 
+            // 二分法
+            for (int[] row : matrix) {
+                int index = search(row, target);
+                if (index >= 0) {
+                    return true;
+                }
+            }
             return false;
+        }
+
+        public int search(int[] nums, int target) {
+            int low = 0, high = nums.length - 1;
+            while (low <= high) {
+                int mid = (high - low) / 2 + low;
+                int num = nums[mid];
+                if (num == target) {
+                    return mid;
+                } else if (num > target) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
+            }
+            return -1;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
