@@ -1,3 +1,5 @@
+# 总结的通用代码
+
 # 数组
 
 ## 二分法通用代码（判断一个数在有序数组中是否存在）
@@ -17,4 +19,19 @@ public int search(int[] nums, int target) {
     }
     return -1;
 }
+```
+
+# 链表
+
+## 节点以及造数据
+```java
+public static class Node{
+        public int value;
+        public Node next;
+
+        public Node(int data){
+            value = data;
+        }
+    }
+
 ```
