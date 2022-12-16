@@ -7,11 +7,11 @@
 
 # 笔记
 
-## 格式
-每篇md我都将尽量按以下过程书写：
+## 笔记格式
 1. 题目描述
 2. 解题思路
 3. 补充
 
 ## lcof（剑指offer）
 1. [面试题5：从尾到头打印链表](src/com/huabin/lcof/leetcode/editor/cn/notes/面试题5：从尾到头打印链表.md)
+2. [面试题6：重建二叉树](src/com/huabin/lcof/leetcode/editor/cn/notes/面试题6：重建二叉树.md)

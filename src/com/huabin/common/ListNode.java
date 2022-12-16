@@ -1,4 +1,4 @@
-package com.huabin.lcof.leetcode.editor.cn;
+package com.huabin.common;
 
 /**
  * @Author huabin
