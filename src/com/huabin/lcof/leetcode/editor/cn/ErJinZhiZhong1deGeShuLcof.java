@@ -56,7 +56,7 @@ public class ErJinZhiZhong1deGeShuLcof {
     public static void main(String[] args) {
         Solution solution = new ErJinZhiZhong1deGeShuLcof().new Solution();
 
-        System.out.println(9 & 1);
+        System.out.println(solution.hammingWeight(8));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -70,20 +70,34 @@ public class ErJinZhiZhong1deGeShuLcof {
 //                if ((n & 1) == 1) {
 //                    count++;
 //                }
-//                n = n >> 1;
+//                n = n >> 1;  // 右移在输入负数时会陷入死循环,因为负数的高位一直是1
 //            }
 //            return count;
 //        }
 
         public int hammingWeight(int n) {
+
             int count = 0;
-            while (n != 0) {
-                // n = n & (n−1)
-                n &= n - 1;
-                count++;
+            int flag = 1;
+
+            while (flag != 0) {
+                if ((n & flag) != 0) {
+                    count++;
+                }
+                flag = flag << 1;
             }
             return count;
         }
+
+//        public int hammingWeight(int n) {
+//            int count = 0;
+//            while (n != 0) {
+//                // n = n & (n−1)
+//                n &= n - 1;
+//                count++;
+//            }
+//            return count;
+//        }
     }
     //leetcode submit region end(Prohibit modification and deletion)
 
