@@ -55,14 +55,34 @@ package com.huabin.lcof.leetcode.editor.cn;
 public class ErJinZhiZhong1deGeShuLcof {
     public static void main(String[] args) {
         Solution solution = new ErJinZhiZhong1deGeShuLcof().new Solution();
+
+        System.out.println(9 & 1);
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     public class Solution {
         // you need to treat n as an unsigned value
-        public int hammingWeight(int n) {
+//        public int hammingWeight(int n) {
+//
+//            int count = 0;
+//
+//            while (n != 0) {
+//                if ((n & 1) == 1) {
+//                    count++;
+//                }
+//                n = n >> 1;
+//            }
+//            return count;
+//        }
 
-            return n;
+        public int hammingWeight(int n) {
+            int count = 0;
+            while (n != 0) {
+                // n = n & (n−1)
+                n &= n - 1;
+                count++;
+            }
+            return count;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
