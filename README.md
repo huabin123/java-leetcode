@@ -17,5 +17,7 @@
 2. [面试题6：重建二叉树](src/com/huabin/lcof/leetcode/editor/cn/notes/面试题6：重建二叉树.md)
 3. [面试题7：用两个栈实现队列](src/com/huabin/lcof/leetcode/editor/cn/notes/面试题7：用两个栈实现队列.md)
 4. [面试题8：旋转数组的最小数字](src/com/huabin/lcof/leetcode/editor/cn/notes/面试题8：旋转数组的最小数字.md)
-5. [面试题9：斐波那契数列](src/com/huabin/lcof/leetcode/editor/cn/notes/面试题9-1：斐波那契数列.md)
-6.
+5. [面试题9-1：斐波那契数列](src/com/huabin/lcof/leetcode/editor/cn/notes/面试题9-1：斐波那契数列.md)
+6. [面试题9-2：青蛙跳台阶问题](src/com/huabin/lcof/leetcode/editor/cn/notes/面试题9-2：青蛙跳台阶问题.md)
+7. [面试题10：二进制中1的个数](src/com/huabin/lcof/leetcode/editor/cn/notes/面试题10：二进制中1的个数.md)
+8. [面试题11：数值的整数次方](src/com/huabin/lcof/leetcode/editor/cn/notes/面试题11：数值的整数次方.md)
