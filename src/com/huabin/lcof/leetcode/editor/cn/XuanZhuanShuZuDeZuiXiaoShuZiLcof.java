@@ -47,63 +47,45 @@ public class XuanZhuanShuZuDeZuiXiaoShuZiLcof {
 
     public static void main(String[] args) {
         Solution solution = new XuanZhuanShuZuDeZuiXiaoShuZiLcof().new Solution();
+        int[] array = new int[] {10,1,10,10,10};
+//        int[] array = new int[] {1,3,5};
 //        int[] array = new int[] {1,1,0,1,1};
-        int[] array = new int[] {3,4,1,2};
+//        int[] array = new int[] {3,4,5,6,-1,1,2};
         System.out.println(solution.minArray(array));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int minArray(int[] numbers) {
+            int startIndex = 0;
+            int endIndex = numbers.length - 1;
 
-            int length = numbers.length;
-            if(length == 0) {
-                return 0;
-            }
-            // i永远为前一个非递减的数组指针
-            int i= 0;
-            // j永远为后一个非递减的数组指针
-            int j= length-1;
-            // middle永远指向中间的值，当旋转数据就是原数组时，返回第1个数字
-            int middle = i;
-            while (numbers[i] >= numbers[j]) {
-                if ((j - i) == 1) {
-                    middle = j;
-                    break;
-                }
-                middle = (j + i) / 2;
-                // 如果下标i, j, middle 指向的三个数字相等，就只能顺序查找（这个也需要技巧）
-                if (numbers[middle] == numbers[i] && numbers[middle] == numbers[j]) {
-                    return minNumberArray(numbers, i, j);
-                }
-
-                if (numbers[middle] >= numbers[i]) {
-                    i = middle;
-                } else if (numbers[middle] <= numbers[j]){
-                    j = middle;
-                }
+            // {1,3,5}
+            if (numbers[endIndex] > numbers[startIndex]) {
+                return numbers[startIndex];
             }
 
-            return numbers[middle];
-        }
+            while (endIndex - startIndex > 1) {
+                int mid = (startIndex + endIndex) / 2;
 
-        /**
-         * 顺序找出旋转数组中最小的值
-         * 因为有序，只要找到第一个递减的值就可以返回了
-         * @param array
-         * @param index1
-         * @param index2
-         * @return
-         */
-        public int minNumberArray(int [] array, int index1, int index2) {
-            int result = array[index1];
-            for (int i = index1; i < index2-1; i++) {
-                result = array[i];
-                if (result > array[i+1]) {
-                    return array[i+1];
+                if (numbers[mid] == numbers[startIndex] && numbers[mid] == numbers[endIndex]) {
+                    // 三个位置都相等的情况只能顺序查找 {10,1,10,10,10}
+                    int res = numbers[startIndex];
+                    for (int i = startIndex+1; i < endIndex+1; i++) {
+                        if (numbers[i] < res) {
+                            res = numbers[i];
+                        }
+                    }
+                    return res;
+                }
+
+                if(numbers[mid] >= numbers[startIndex]) {
+                    startIndex = mid;
+                }else {
+                    endIndex = mid;
                 }
             }
-            return result;
+            return numbers[endIndex];
         }
 
     }
