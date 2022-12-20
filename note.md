@@ -40,10 +40,20 @@ public static class Node{
 
 # 树
 
-## 树的三种遍历，6个实现
+## 树的三种遍历
 
 ### 前序遍历
 
 ### 中序遍历
+
+```java
+// 打印中序遍历
+void dfs(Node root) {
+    if(root == null) return;
+    dfs(root.left); // 左
+    System.out.println(root.val); // 根
+    dfs(root.right); // 右
+}
+```
 
 ### 后序遍历
