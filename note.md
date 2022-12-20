@@ -3,6 +3,7 @@
 # 数组
 
 ## 二分法通用代码（判断一个数在有序数组中是否存在）
+
 ```java
 public int search(int[] nums, int target) {
     int low = 0, high = nums.length - 1;
@@ -24,6 +25,7 @@ public int search(int[] nums, int target) {
 # 链表
 
 ## 节点以及造数据
+
 ```java
 public static class Node{
         public int value;
@@ -39,6 +41,9 @@ public static class Node{
 # 树
 
 ## 树的三种遍历，6个实现
+
 ### 前序遍历
+
 ### 中序遍历
+
 ### 后序遍历
