@@ -1,6 +1,60 @@
-# 总结的通用代码
+# 必须掌握的基石算法总结
 
 # 数组
+
+## 排序
+
+### 快排
+
+#### 快速排序原理：
+
+快速排序算法有两个核心点，分别为 “哨兵划分” 和 “递归” 。
+
+**哨兵划分操作：** 以数组某个元素（一般选取首元素）为 **基准数** ，将所有小于基准数的元素移动至其左边，大于基准数的元素移动至其右边。
+
+**递归：** 对 **左子数组** 和 **右子数组** 递归执行  **哨兵划分** ，直至子数组长度为 1 时终止递归，即可完成对整个数组的排序。
+
+> 如下图所示，为示例数组 `[2,4,1,0,3,5]` 的快速排序流程。观察发现，快速排序和 **二分法** 的原理类似，都是以 **lo**g 时间复杂度实现搜索区间缩小。
+
+![QuickSort1.png](assets/QuickSort-1.png?t=1671604780333)
+
+#### 代码实现
+
+```java
+class Solution {
+        public void sort(int[] arr) {
+            quickSort(arr, 0, arr.length - 1);
+        }
+
+        private void quickSort(int[] arr, int l, int r) {
+            // 子数组长度为1时终止递归
+            if (l >= r) {
+                return;
+            }
+            // 哨兵划分操作（以arr[l]作为基准数）
+            int i = l, j = r;
+            while (i < j) {
+                while (i < j && arr[j] >= arr[l]) {
+                    j--;
+                }
+                while (i < j && arr[i] <= arr[l]) {
+                    i++;
+                }
+                swap(arr, i, j);  // 这里不交换会一直循环
+            }
+            swap(arr, i, l);
+            // 递归左（右）子数组执行哨兵划分
+            quickSort(arr, l, i - 1);
+            quickSort(arr, i + 1, r);
+        }
+
+        private void swap(int[] arr, int i, int j) {
+            int tmp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = tmp;
+        }
+    }
+```
 
 ## 二分法通用代码（判断一个数在有序数组中是否存在）
 
