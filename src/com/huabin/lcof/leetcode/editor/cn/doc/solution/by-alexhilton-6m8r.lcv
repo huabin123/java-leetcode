@@ -1,0 +1,89 @@
+### 回溯+排序去重 解题思路
+
+此题与[题47 全排列 II](https://leetcode.cn/problems/permutations-ii/solution/by-alexhilton-m337/)其实是完全一样的，只不过是由数字换成了字符，但本质都一样，可以用题47的方法直接套过来。
+
+唯一的区别就是，先把字符串转成字符数组，然后排列结果直接用字符串拼接，可以省去回溯操作，因为拼接是生成一个新的字符串对象，对原字符 串没有影响。
+
+* java
+
+```java
+class Solution {
+    private List<String> result;
+    private boolean[] visited;
+
+    public String[] permutation(String s) {
+        result = new ArrayList<>();
+        visited = new boolean[s.length()];
+        char[] payloads = s.toCharArray();
+        Arrays.sort(payloads);
+        permuate(payloads, "");
+
+        return result.stream().toArray(String[]::new);
+    }
+
+    private void permuate(char[] s, String p) {
+        if (p.length() == s.length) {
+            result.add(p);
+            return;
+        }
+        for (int i = 0; i < s.length; i++) {
+            if (visited[i] || (i > 0 && s[i] == s[i - 1] && !visited[i - 1])) {
+                continue;
+            }
+            visited[i] = true;
+            permuate(s, p + s[i]);
+            visited[i] = false;
+        }
+    }
+}
+```
+
+时间复杂度$O(n!)$，空间复杂度$O(n)$。
+
+### 回溯之原地修改数组
+
+与题47一样，也可以直接修改字符数组来实现排列。
+
+* java
+
+```java
+class Solution {
+    private List<String> result;
+
+    public String[] permutation(String s) {
+        result = new ArrayList<>();
+        char[] payloads = s.toCharArray();
+
+        permuate(payloads, 0);
+
+        return result.stream().toArray(String[]::new);
+    }
+
+    private void permuate(char[] s, int index) {
+        if (index == s.length) {
+            result.add(new String(s));
+            return;
+        }
+        Set<Character> set = new HashSet<>();
+        for (int i = index; i < s.length; i++) {
+            if (set.contains(s[i])) {
+                continue;
+            }
+            set.add(s[i]);
+            swap(s, i, index);
+            permuate(s, index + 1);
+            swap(s, i, index);
+        }
+    }
+
+    private void swap(char[] s, int i, int j) {
+        if (i != j) {
+            char t = s[i];
+            s[i] = s[j];
+            s[j] = t;
+        }
+    }
+}
+```
+
+时间复杂度$O(n!)$，空间复杂度$O(n)$。
