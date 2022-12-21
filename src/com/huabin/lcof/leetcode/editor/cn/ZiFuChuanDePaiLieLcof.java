@@ -27,6 +27,9 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * todo 自己实现
+ */
 public class ZiFuChuanDePaiLieLcof {
     public static void main(String[] args) {
         Solution solution = new ZiFuChuanDePaiLieLcof().new Solution();
