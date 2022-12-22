@@ -25,6 +25,7 @@ package com.huabin.lcof.leetcode.editor.cn;
 public class ChouShuLcof {
     public static void main(String[] args) {
         Solution solution = new ChouShuLcof().new Solution();
+        System.out.println(solution.nthUglyNumber(1690));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
