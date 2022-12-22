@@ -1,0 +1,47 @@
+> Problem: [剑指 Offer 42. 连续子数组的最大和](https://leetcode.cn/problems/lian-xu-zi-shu-zu-de-zui-da-he-lcof/description/)
+
+[TOC]
+
+# 思路
+
+尝试动态规划的方式解决，需要设计dp数组以及推导状态转移方程。
+
+# 解题方法
+
+dp数组代表以i位置结尾时，子数组的最大值。
+以此可得，状态转移方程：dp[i] = Max((dp[i-1] + nums[i]), nums[i])。
+
+# 复杂度
+
+- 时间复杂度:
+
+> $O(n)$
+
+- 空间复杂度:
+
+> $O(n)$
+
+# Code
+
+* []
+
+```Java
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        if(nums.length == 1){
+            return nums[0];
+        }
+        int[] dp = new int[nums.length];
+        int result = Integer.MIN_VALUE;
+        dp[0] = nums[0];
+        result = nums[0];
+        for(int i = 1; i < nums.length; i++){
+            dp[i] = Math.max(nums[i], (dp[i-1] + nums[i]));
+            result = Math.max(dp[i], result);
+        }
+        return result;
+    }
+};
+```
+
