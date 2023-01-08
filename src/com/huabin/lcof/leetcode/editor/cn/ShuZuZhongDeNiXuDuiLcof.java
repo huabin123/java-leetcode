@@ -18,13 +18,10 @@
 
 package com.huabin.lcof.leetcode.editor.cn;
 
-/**
- * todo 自己解题
- */
 public class ShuZuZhongDeNiXuDuiLcof {
     public static void main(String[] args) {
         Solution solution = new ShuZuZhongDeNiXuDuiLcof().new Solution();
-        solution.reversePairs(new int[]{7, 3, 2, 6, 0, 1, 5, 4});
+        System.out.println(solution.reversePairs(new int[]{7, 3, 2, 6, 0, 1, 5, 4, 7, 9, 0}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -54,7 +51,7 @@ public class ShuZuZhongDeNiXuDuiLcof {
                     nums[k] = tmp[i++];
                 else {
                     nums[k] = tmp[j++];
-                    res += m - i + 1; // 统计逆序对
+                    res += m - i + 1; // 统计逆序对 当前i的比j大，那么i后面的所有数字都比j大
                 }
             }
             return res;
