@@ -1,4 +1,4 @@
-# 必须掌握的基石算法总结
+# 基石算法总结
 
 # 数组
 
@@ -59,7 +59,6 @@ class Solution {
 #### 扩展
 
 **[快排与topK问题](src/com/huabin/lcof/leetcode/editor/cn/notes/面试题30：最小的k个数.md)**
-
 
 ### 归并
 
@@ -141,15 +140,9 @@ public class MergeSort {
 }
 ```
 
-
 #### 扩展
 
 [数组中的逆序对](src/com/huabin/lcof/leetcode/editor/cn/notes/面试题36：数组中的逆序对.md)
-
-
-
-
-
 
 ## 二分法通用代码（判断一个数在有序数组中是否存在）
 
@@ -157,7 +150,8 @@ public class MergeSort {
 public int search(int[] nums, int target) {
     int low = 0, high = nums.length - 1;
     while (low <= high) {
-        int mid = (high - low) / 2 + low;
+        // int mid = (L + R) / 2
+        int mid = L + ((R - L) >> 1);  // 用位运算不会内存溢出
         int num = nums[mid];
         if (num == target) {
             return mid;
