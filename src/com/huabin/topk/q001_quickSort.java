@@ -20,7 +20,7 @@ public class q001_quickSort {
     }
 
     private static int partition(int[] arr, int low, int high) {
-        int pivot = arr[high];  // 选取最右边的
+        int pivot = arr[high];  // 选取最右边的作为基准点
         int i = low - 1;
         for (int j = low; j < high; j++) {
             if (arr[j] <= pivot) {
@@ -61,7 +61,7 @@ public class q001_quickSort {
 
 
     public static void main(String[] args) {
-        int[] arr = {9, 4, 7, 2, 1, 5, 8, 3, 6};
+        int[] arr = {9, 4, 7, 2, 1, 5, 8, 3, 6, 0};
 
         System.out.println("Original array: ");
         printArray(arr);
