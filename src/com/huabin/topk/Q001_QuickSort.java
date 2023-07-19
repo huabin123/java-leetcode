@@ -34,6 +34,29 @@ public class Q001_QuickSort {
         return less+1;
     }
 
+    // --------- 递归实现2.0 三轴排序，分区函数返回等于基准值的数组 -----------
+    public static void quicksortRecursive2(int[] array){
+        quicksortRecursive2(array, 0, array.length - 1);
+    }
+
+    public static void quicksortRecursive2(int[] array, int L, int R){
+        if (L < R) {
+            int[] equalArea = partition2(array, L, R);
+            partition2(array, L, equalArea[0] - 1);
+            partition2(array, equalArea[1] + 1, R);
+        }
+    }
+
+    public static int[] partition2(int[] array, int L, int R){
+        int less = L - 1;
+        int more = R;
+        int index = L;
+        while (index < more) {
+
+        }
+        return new int[]{};
+    }
+
 
     public static void swap(int[] array, int L, int R){
         int temp = array[L];
