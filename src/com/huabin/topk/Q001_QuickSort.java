@@ -42,8 +42,8 @@ public class Q001_QuickSort {
     public static void quicksortRecursive2(int[] array, int L, int R){
         if (L < R) {
             int[] equalArea = partition2(array, L, R);
-            partition2(array, L, equalArea[0] - 1);
-            partition2(array, equalArea[1] + 1, R);
+            quicksortRecursive2(array, L, equalArea[0] - 1);
+            quicksortRecursive2(array, equalArea[1] + 1, R);
         }
     }
 
@@ -51,10 +51,58 @@ public class Q001_QuickSort {
         int less = L - 1;
         int more = R;
         int index = L;
+        int RV = array[R];
         while (index < more) {
-
+            int indexV = array[index];
+            if (indexV == RV) {
+                index++;
+            } else if (indexV > RV) {
+                more--;
+                swap(array, index, more);
+            } else {
+                less++;
+                swap(array, index, less);
+                index++;
+            }
         }
-        return new int[]{};
+        swap(array,more,R);
+        return new int[]{less+1, more};
+    }
+
+    // --------- 递归实现3.0 把arr[R]作为基准点改为选择L,R内随机一个作为基准点，这样时间复杂度就是nlogn -----------
+    public static void quicksortRecursive3(int[] array) {
+        quicksortRecursive2(array, 0, array.length - 1);
+    }
+
+    public static void quicksortRecursive3(int[] array, int L, int R) {
+        if (L < R) {
+            swap(array, L + (int) (Math.random() * (R - L + 1)), R);
+            int[] equalArea = partition3(array, L, R);
+            quicksortRecursive3(array, L, equalArea[0] - 1);
+            quicksortRecursive3(array, equalArea[1] + 1, R);
+        }
+    }
+
+    public static int[] partition3(int[] array, int L, int R) {
+        int less = L - 1;
+        int more = R;
+        int index = L;
+        int RV = array[R];
+        while (index < more) {
+            int indexV = array[index];
+            if (indexV == RV) {
+                index++;
+            } else if (indexV > RV) {
+                more--;
+                swap(array, index, more);
+            } else {
+                less++;
+                swap(array, index, less);
+                index++;
+            }
+        }
+        swap(array, more, R);
+        return new int[]{less + 1, more};
     }
 
 
@@ -67,6 +115,16 @@ public class Q001_QuickSort {
     public static void main(String[] args) {
         int[] arr = new int[]{9, 4, 7, 3, 2, 1, 5, 8, 3, 6};
         quicksortRecursive(arr);
+        printArray(arr);
+
+        // Test quicksortRecursive2
+        arr = new int[]{9, 4, 7, 3, 2, 1, 5, 8, 3, 6};
+        quicksortRecursive2(arr);
+        printArray(arr);
+
+        // Test quicksortRecursive3
+        arr = new int[]{9, 4, 7, 3, 2, 1, 5, 8, 3, 6};
+        quicksortRecursive3(arr);
         printArray(arr);
     }
 
