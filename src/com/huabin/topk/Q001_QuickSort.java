@@ -1,6 +1,8 @@
 package com.huabin.topk;
 
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -146,6 +148,33 @@ public class Q001_QuickSort {
 
     }
 
+    // ------- 迭代实现-队列 -----------
+    public static void quicksortIterativeByQueue(int[] array){
+        if (array == null || array.length < 2) {
+            return;
+        }
+        int N = array.length;
+        swap(array, (int) (Math.random() * N), N-1);
+        int[] equalArea = partition3(array, 0, N - 1);
+        int el = equalArea[0];
+        int er = equalArea[1];
+        Queue<Op> queue = new LinkedList<>();
+        queue.offer(new Op(0, el-1));
+        queue.offer(new Op(er+1, N-1));
+        while (!queue.isEmpty()) {
+            Op op = queue.poll();
+            if (op.l < op.r) {
+                swap(array, op.l + (int) (Math.random() * (op.r - op.l + 1)), op.r);
+                equalArea = partition3(array, op.l, op.r);
+                el = equalArea[0];
+                er = equalArea[1];
+                queue.offer(new Op(op.l, el - 1));
+                queue.offer(new Op(er + 1, op.r));
+            }
+        }
+
+    }
+
 
     public static void swap(int[] array, int L, int R){
         int temp = array[L];
@@ -171,6 +200,11 @@ public class Q001_QuickSort {
         // Test quicksortIterativeByStack
         arr = new int[]{9, 4, 7, 3, 2, 1, 5, 8, 3, 6};
         quicksortIterativeByStack(arr);
+        printArray(arr);
+
+        // Test quicksortIterativeByQueue
+        arr = new int[]{9, 4, 7, 3, 2, 1, 5, 8, 3, 6};
+        quicksortIterativeByQueue(arr);
         printArray(arr);
     }
 
