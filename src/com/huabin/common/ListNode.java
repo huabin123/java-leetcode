@@ -24,6 +24,8 @@ public class ListNode {
         n1.next.next = new ListNode(3);
         n1.next.next.next = new ListNode(4);
         n1.next.next.next.next = new ListNode(5);
+        // 测试环形链表
+        n1.next.next.next.next.next = n1;
         return n1;
     }
 
