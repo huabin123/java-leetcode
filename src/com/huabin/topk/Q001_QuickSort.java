@@ -1,6 +1,8 @@
 package com.huabin.topk;
 
 
+import java.util.Stack;
+
 /**
  * 使用递归及非递归两种方式实现快速排序
  */
@@ -105,6 +107,45 @@ public class Q001_QuickSort {
         return new int[]{less + 1, more};
     }
 
+    // ------- 迭代实现-栈 -----------
+
+    // 迭代实现需要一个辅助类，记录排序的区间
+    public static class Op{
+        public int l;
+        public int r;
+
+        public Op(int l, int r) {
+            this.l = l;
+            this.r = r;
+        }
+    }
+
+    public static void quicksortIterativeByStack(int[] array){
+        if (array == null || array.length < 2) {
+            return;
+        }
+        int N = array.length;
+        swap(array, (int) (Math.random() * N), N-1);
+        int[] equalArea = partition3(array, 0, N - 1);
+        int el = equalArea[0];
+        int er = equalArea[1];
+        Stack<Op> stack = new Stack<>();
+        stack.push(new Op(0, el-1));
+        stack.push(new Op(er+1, N-1));
+        while (!stack.isEmpty()) {
+            Op op = stack.pop();
+            if (op.l < op.r) {
+                swap(array, op.l + (int) (Math.random() * (op.r - op.l + 1)), op.r);
+                equalArea = partition3(array, op.l, op.r);
+                el = equalArea[0];
+                er = equalArea[1];
+                stack.push(new Op(op.l, el - 1));
+                stack.push(new Op(er + 1, op.r));
+            }
+        }
+
+    }
+
 
     public static void swap(int[] array, int L, int R){
         int temp = array[L];
@@ -125,6 +166,11 @@ public class Q001_QuickSort {
         // Test quicksortRecursive3
         arr = new int[]{9, 4, 7, 3, 2, 1, 5, 8, 3, 6};
         quicksortRecursive3(arr);
+        printArray(arr);
+
+        // Test quicksortIterativeByStack
+        arr = new int[]{9, 4, 7, 3, 2, 1, 5, 8, 3, 6};
+        quicksortIterativeByStack(arr);
         printArray(arr);
     }
 
