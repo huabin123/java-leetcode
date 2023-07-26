@@ -11,7 +11,8 @@ public class ArrUtil {
      * @Return int[]
      */
     public static int[] genRandomArr(int maxNum, int maxLen) {
-        int len = (int) (Math.random() * maxLen);
+//        int len = (int) (Math.random() * maxLen);
+        int len = maxLen;
         int[] ints = new int[len];
         for (int i = 0; i < len; i++) {
             ints[i] = (int) (Math.random() * maxNum);
