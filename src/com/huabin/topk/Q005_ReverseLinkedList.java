@@ -11,7 +11,7 @@ import java.util.Stack;
  */
 public class Q005_ReverseLinkedList {
 
-    // ------ 解法一：虚指针法 ------
+    // ------ 解法一：哑节点法 ------
     public static ListNode reverseByPoint(ListNode head){
         if (head == null || head.next == null) {
             return head;
