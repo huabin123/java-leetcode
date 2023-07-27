@@ -18,7 +18,7 @@ public class ListNode {
         val = data;
     }
 
-    public ListNode init() {
+    public static ListNode init() {
         ListNode n1 = new ListNode(1);
         n1.next = new ListNode(2);
         n1.next.next = new ListNode(3);
