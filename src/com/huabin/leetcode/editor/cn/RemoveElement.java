@@ -67,21 +67,76 @@ public class RemoveElement{
         Solution solution = new RemoveElement().new Solution();
         System.out.println(solution.removeElement(new int[]{3, 2, 2, 3}, 3));
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
-    class Solution {
+//    //leetcode submit region begin(Prohibit modification and deletion)
+//    class Solution {
+//
+//        public int removeElement(int[] nums, int val) {
+//            int ans = 0;
+//            for(int num: nums) {
+//                if(num != val) {
+//                    nums[ans] = num;
+//                    ans++;
+//                }
+//            }
+//            return ans;
+//        }
+//
+//    }
+//    //leetcode submit region end(Prohibit modification and deletion)
 
+//    class Solution {
+//        public int removeElement(int[] nums, int val) {
+//            int size = nums.length;
+//            // 暴力破解
+//            // 两个循环里都需要使用size，而不是nums.length,size在移动后需要--，不然不能退出循环
+//            for (int i=0; i < size; i++){
+//                if (nums[i] == val) {
+////                    for (int j = i; j < size; j++) {  // 不能这么写，会下标越界
+////                        // 后面的元素往前移
+////                        nums[j] = nums[j+1];
+////                    }
+//                    for (int j = i+1; j < size; j++) {
+//                        // 后面的元素往前移
+//                        nums[j-1] = nums[j];
+//                    }
+//                    i--;
+//                    size--;
+//                }
+//            }
+//            return size;
+//        }
+//    }
+
+//    class Solution {
+//        public int removeElement(int[] nums, int val) {
+//            int size = nums.length;
+//            for (int i = 0; i < size; i++) {
+//                if (nums[i] == val){
+//                    for (int j = i+1; j < size; j++) {
+//                        nums[j - 1] = nums[j];
+//                    }
+//                    size--;
+//                    i--;
+//                }
+//            }
+//
+//            return size;
+//        }
+//    }
+
+
+    class Solution {
         public int removeElement(int[] nums, int val) {
-            int ans = 0;
-            for(int num: nums) {
-                if(num != val) {
-                    nums[ans] = num;
-                    ans++;
+            // 双指针法，快指针作为寻找新元素的指针需要遍历所有元素，慢指针指向新数组下标位置
+            int slowIndex = 0;
+            for (int fastIndex = 0; fastIndex < nums.length; fastIndex++) {
+                if (nums[fastIndex] != val) {
+                    nums[slowIndex] = nums[fastIndex];
+                    slowIndex++;
                 }
             }
-            return ans;
+            return slowIndex;
         }
-
     }
-    //leetcode submit region end(Prohibit modification and deletion)
 
 }
