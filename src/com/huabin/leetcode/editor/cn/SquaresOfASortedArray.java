@@ -48,7 +48,18 @@ public class SquaresOfASortedArray{
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[] sortedSquares(int[] nums) {
-            return null;
+            int l = 0;
+            int r = nums.length - 1;
+            int[] result = new int[nums.length];
+            int j = nums.length - 1;
+            while (l <= r) { // 头尾指针碰撞作为终止条件
+                if (nums[l] * nums[l] > nums[r] * nums[r]) {
+                    result[j--] = nums[l] * nums[l++];
+                }else {
+                    result[j--] = nums[r] * nums[r--];
+                }
+            }
+            return result;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)

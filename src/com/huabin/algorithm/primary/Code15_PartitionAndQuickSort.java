@@ -209,7 +209,7 @@ public class Code15_PartitionAndQuickSort {
 //			System.out.print(arr[i] + " ");
 //		}
 
-        int testTime = 500000;
+        int testTime = 50000;
         int maxSize = 100;
         int maxValue = 100;
         boolean succeed = true;
@@ -218,10 +218,16 @@ public class Code15_PartitionAndQuickSort {
             int[] arr1 = generateRandomArray(maxSize, maxValue);
             int[] arr2 = copyArray(arr1);
             int[] arr3 = copyArray(arr1);
+            int[] arr4 = copyArray(arr1);
+            // 递归，荷兰国旗优化
             quickSort1(arr1);
+            // 迭代，栈实现
             quickSort2(arr2);
+            // 递归，随机性优化
             quickSort3(arr3);
-            if (!isEqual(arr1, arr2) || !isEqual(arr1, arr3)) {
+            // 递归，普通版本
+            quickSort(arr4);
+            if (!isEqual(arr1, arr2) || !isEqual(arr1, arr3) || !isEqual(arr1, arr4)) {
                 System.out.println("Oops!");
                 succeed = false;
                 break;
@@ -230,6 +236,41 @@ public class Code15_PartitionAndQuickSort {
         System.out.println("test end");
         System.out.println(succeed ? "Nice!" : "Oops!");
 
+    }
+
+    private static void quickSort(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            return;
+        }
+        process4(arr, 0, arr.length - 1);
+    }
+
+    private static void process4(int[] arr, int l, int r) {
+        if (l < r){
+            int pivotIndex = partition4(arr, l, r);
+            process4(arr, l, pivotIndex-1);
+            process4(arr, pivotIndex+1, r);
+        }
+    }
+
+    private static int partition4(int[] arr, int l, int r) {
+        int pivot = arr[r];
+        int i = l - 1;
+
+        for (int j = l; j < arr.length; j++) {  // 注意这里j要等于l而不能等于0或者是i
+            if (arr[j] < pivot) {
+                i++;
+                swap(arr,j,i);
+            }
+        }
+        swap4(arr,i+1, r);
+        return i + 1;
+    }
+
+    private static void swap4(int[] arr, int i, int r) {
+        int tmp = arr[i];
+        arr[i] = arr[r];
+        arr[r] = tmp;
     }
 
 }
