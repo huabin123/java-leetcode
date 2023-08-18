@@ -18,6 +18,11 @@ public class ListNode {
         val = data;
     }
 
+    public ListNode(int val, ListNode next) {
+        this.val = val;
+        this.next = next;
+    }
+
     public static ListNode init() {
         ListNode n1 = new ListNode(1);
         n1.next = new ListNode(2);
