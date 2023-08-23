@@ -72,7 +72,7 @@ public class FourSum{
                     int left = j + 1;
                     int right = nums.length - 1;
                     while (left < right) {
-                        long sum = (long)nums[i] + nums[j] + nums[left] + nums[right];
+                        long sum = (long)nums[i] + nums[j] + nums[left] + nums[right];  // 转long，不然超int限制
                         if (sum == target) {
                             result.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));
                             // 对left，right去重
