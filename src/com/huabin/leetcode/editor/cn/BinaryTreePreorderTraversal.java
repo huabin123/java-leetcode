@@ -60,6 +60,7 @@ import com.sun.org.apache.xpath.internal.objects.XNodeSet;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class BinaryTreePreorderTraversal{
     public static void main(String[] args) {
@@ -82,22 +83,45 @@ public class BinaryTreePreorderTraversal{
      * }
      */
     class Solution {
+//        public List<Integer> preorderTraversal(TreeNode root) {
+//            // 怎么写递归？递归三要素
+//            // 1、确定递归函数的参数和返回值。确定哪些参数是递归的过程中需要处理的，那么就在递归函数里加上这个参数，并且还要明确每次递归的返回值是什么进而确定递归函数的返回类型。
+//            List<Integer> res = new ArrayList<>();
+//            traversal(res, root);
+//            return res;
+//        }
+//        private void traversal(List<Integer> res, TreeNode node) {
+//            // 2、确定终止条件。终止条件不正确就会栈溢出
+//            if (node == null) {
+//                return;
+//            }
+//            // 3、确定单层递归的逻辑
+//            res.add(node.val);
+//            traversal(res, node.left);
+//            traversal(res, node.right);
+//        }
+
+        // 通过栈实现
         public List<Integer> preorderTraversal(TreeNode root) {
-            // 怎么写递归？递归三要素
-            // 1、确定递归函数的参数和返回值。确定哪些参数是递归的过程中需要处理的，那么就在递归函数里加上这个参数，并且还要明确每次递归的返回值是什么进而确定递归函数的返回类型。
             List<Integer> res = new ArrayList<>();
-            traversal(res, root);
-            return res;
-        }
-        private void traversal(List<Integer> res, TreeNode node) {
-            // 2、确定终止条件。终止条件不正确就会栈溢出
-            if (node == null) {
-                return;
+            if (root == null) {
+                return res;
             }
-            // 3、确定单层递归的逻辑
-            res.add(node.val);
-            traversal(res, node.left);
-            traversal(res, node.right);
+
+            Stack<TreeNode> stack = new Stack<>();
+            stack.push(root);
+            while (!stack.isEmpty()) {
+                TreeNode node = stack.pop();
+                res.add(node.val);
+                // 前序遍历返回list的顺序需要是中左右，入栈顺序需要先入右再入左
+                if (node.right != null) {
+                    stack.push(node.right);
+                }
+                if (node.left != null) {
+                    stack.push(node.left);
+                }
+            }
+            return res;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)

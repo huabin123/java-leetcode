@@ -45,10 +45,13 @@ import com.huabin.common.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class BinaryTreeInorderTraversal{
     public static void main(String[] args) {
         Solution solution = new BinaryTreeInorderTraversal().new Solution();
+        TreeNode root = TreeNode.init();
+        System.out.println(solution.inorderTraversal(root));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
     /**
@@ -67,19 +70,39 @@ public class BinaryTreeInorderTraversal{
      * }
      */
     class Solution {
-        public List<Integer> inorderTraversal(TreeNode root) {
-            List<Integer> res = new ArrayList<>();
-            traversal(res, root);
-            return res;
-        }
+//        public List<Integer> inorderTraversal(TreeNode root) {
+//            List<Integer> res = new ArrayList<>();
+//            traversal(res, root);
+//            return res;
+//        }
+//
+//        private void traversal(List<Integer> res, TreeNode node) {
+//            if (node == null) {
+//                return;
+//            }
+//            traversal(res, node.left);
+//            res.add(node.val);
+//            traversal(res, node.right);
+//        }
 
-        private void traversal(List<Integer> res, TreeNode node) {
-            if (node == null) {
-                return;
+        public List<Integer> inorderTraversal(TreeNode root) {
+            List<Integer> result = new ArrayList<>();
+            if (root == null) {
+                return result;
             }
-            traversal(res, node.left);
-            res.add(node.val);
-            traversal(res, node.right);
+            Stack<TreeNode> stack = new Stack<>();
+            TreeNode cur = root;
+            while (cur != null || !stack.isEmpty()) {
+                if (cur != null) {
+                    stack.push(cur);
+                    cur = cur.left;
+                } else {
+                    cur = stack.pop();
+                    result.add(cur.val);
+                    cur = cur.right;
+                }
+            }
+            return result;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
