@@ -90,7 +90,8 @@ public class BinaryTreeLevelOrderTraversal{
                     TreeNode tmpNode = que.poll();  // 从队头取出要处理的节点
                     itemList.add(tmpNode.val);
 
-                    if (tmpNode.left != null) que.offer(tmpNode.left);  // 加入左节点待下一次遍历
+                    if (tmpNode.left != null) // 不要忘了这个判断，不然循环出不来
+                        que.offer(tmpNode.left);  // 加入左节点待下一次遍历
                     if (tmpNode.right != null) que.offer(tmpNode.right);  // 加入右节点待下一次遍历
                     len--;
                 }
