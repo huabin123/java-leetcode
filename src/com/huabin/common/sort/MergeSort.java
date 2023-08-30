@@ -1,4 +1,4 @@
-package com.huabin.common.basic;
+package com.huabin.common.sort;
 
 /**
  * @Author huabin

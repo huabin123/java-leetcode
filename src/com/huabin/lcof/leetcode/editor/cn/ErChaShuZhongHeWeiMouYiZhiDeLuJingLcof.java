@@ -46,7 +46,7 @@
 
 package com.huabin.lcof.leetcode.editor.cn;
 
-import com.huabin.common.TreeNode;
+import com.huabin.common.tree.TreeNode;
 
 import java.util.LinkedList;
 import java.util.List;

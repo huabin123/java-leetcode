@@ -1,6 +1,6 @@
 package com.huabin.topk;
 
-import com.huabin.common.TreeNode;
+import com.huabin.common.tree.TreeNode;
 
 /**
  * @Author huabin

@@ -55,8 +55,7 @@
 
 package com.huabin.leetcode.editor.cn;
 
-import com.huabin.common.TreeNode;
-import com.sun.org.apache.xpath.internal.objects.XNodeSet;
+import com.huabin.common.tree.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;

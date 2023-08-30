@@ -40,7 +40,7 @@
 
 package com.huabin.leetcode.editor.cn;
 
-import com.huabin.common.TreeNode;
+import com.huabin.common.tree.TreeNode;
 
 import java.util.*;
 

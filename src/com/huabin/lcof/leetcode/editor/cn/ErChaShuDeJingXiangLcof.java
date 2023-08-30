@@ -27,7 +27,7 @@
 
 package com.huabin.lcof.leetcode.editor.cn;
 
-import com.huabin.common.TreeNode;
+import com.huabin.common.tree.TreeNode;
 
 public class ErChaShuDeJingXiangLcof {
     public static void main(String[] args) {

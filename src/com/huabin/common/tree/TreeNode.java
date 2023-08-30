@@ -1,4 +1,4 @@
-package com.huabin.common;
+package com.huabin.common.tree;
 
 /**
  * @Author huabin
