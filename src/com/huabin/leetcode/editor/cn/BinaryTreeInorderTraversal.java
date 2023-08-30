@@ -85,24 +85,46 @@ public class BinaryTreeInorderTraversal{
 //            traversal(res, node.right);
 //        }
 
+//        public List<Integer> inorderTraversal(TreeNode root) {
+//            List<Integer> result = new ArrayList<>();
+//            if (root == null) {
+//                return result;
+//            }
+//            Stack<TreeNode> stack = new Stack<>();
+//            TreeNode cur = root;
+//            while (cur != null || !stack.isEmpty()) {
+//                if (cur != null) {
+//                    stack.push(cur);
+//                    cur = cur.left;
+//                } else {
+//                    cur = stack.pop();
+//                    result.add(cur.val);
+//                    cur = cur.right;
+//                }
+//            }
+//            return result;
+//        }
+
+        // 使用栈，迭代实现
         public List<Integer> inorderTraversal(TreeNode root) {
-            List<Integer> result = new ArrayList<>();
+            List<Integer> res = new ArrayList<>();
             if (root == null) {
-                return result;
+                return res;
             }
             Stack<TreeNode> stack = new Stack<>();
-            TreeNode cur = root;
-            while (cur != null || !stack.isEmpty()) {
+//            stack.push(root);  // 这里不能直接把root推入，因为是中序，是左中右的顺序
+            TreeNode cur = root;  // 这个cur的定义是中序遍历的关键，
+            while (!stack.isEmpty() || cur != null) {  // 条件也不同，
                 if (cur != null) {
                     stack.push(cur);
                     cur = cur.left;
                 } else {
                     cur = stack.pop();
-                    result.add(cur.val);
+                    res.add(cur.val);
                     cur = cur.right;
                 }
             }
-            return result;
+            return res;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
