@@ -69,23 +69,24 @@ public class BinaryTreePostorderTraversal{
      * }
      */
     class Solution {
-//        public List<Integer> postorderTraversal(TreeNode root) {
-//            List<Integer> res = new ArrayList<>();
-//            traversal(res, root);
-//            return res;
-//        }
-//
-//        private void traversal(List<Integer> res, TreeNode node) {
-//            if (node == null) {
-//                return;
-//            }
-//            traversal(res, node.left);
-//            traversal(res, node.right);
-//            res.add(node.val);
-//        }
+        // 递归
+        public List<Integer> postorderTraversal(TreeNode root) {
+            List<Integer> res = new ArrayList<>();
+            traversal(res, root);
+            return res;
+        }
+
+        private void traversal(List<Integer> res, TreeNode node) {
+            if (node == null) {
+                return;
+            }
+            traversal(res, node.left);
+            traversal(res, node.right);
+            res.add(node.val);
+        }
 
         // 后序遍历顺序 左-右-中 入栈顺序：中-左-右 出栈顺序：中-右-左， 最后翻转结果
-        public List<Integer> postorderTraversal(TreeNode root) {
+        public List<Integer> postorderTraversal02(TreeNode root) {
             List<Integer> result = new ArrayList<>();
             if (root == null) {
                 return result;
