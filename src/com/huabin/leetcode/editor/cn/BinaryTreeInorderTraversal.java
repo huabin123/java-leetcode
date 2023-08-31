@@ -85,28 +85,9 @@ public class BinaryTreeInorderTraversal{
 //            traversal(res, node.right);
 //        }
 
-//        public List<Integer> inorderTraversal(TreeNode root) {
-//            List<Integer> result = new ArrayList<>();
-//            if (root == null) {
-//                return result;
-//            }
-//            Stack<TreeNode> stack = new Stack<>();
-//            TreeNode cur = root;
-//            while (cur != null || !stack.isEmpty()) {
-//                if (cur != null) {
-//                    stack.push(cur);
-//                    cur = cur.left;
-//                } else {
-//                    cur = stack.pop();
-//                    result.add(cur.val);
-//                    cur = cur.right;
-//                }
-//            }
-//            return result;
-//        }
-
         // 使用栈，迭代实现
         public List<Integer> inorderTraversal(TreeNode root) {
+            // 中序遍历的不同在于变量顺序和处理顺序不同，需要先找到最左边的节点
             List<Integer> res = new ArrayList<>();
             if (root == null) {
                 return res;
@@ -114,14 +95,14 @@ public class BinaryTreeInorderTraversal{
             Stack<TreeNode> stack = new Stack<>();
 //            stack.push(root);  // 这里不能直接把root推入，因为是中序，是左中右的顺序
             TreeNode cur = root;  // 这个cur的定义是中序遍历的关键，
-            while (!stack.isEmpty() || cur != null) {  // 条件也不同，
+            while (!stack.isEmpty() || cur != null) {  // 条件也不同，只要栈不为空或者cur不为null就还有元素要处理，为什么还要cur != null ,因为不是每次都会往stack里push元素
                 if (cur != null) {
-                    stack.push(cur);
-                    cur = cur.left;
+                    stack.push(cur);  // 栈中保存遍历的元素
+                    cur = cur.left;  // 从左子节点开始处理
                 } else {
-                    cur = stack.pop();
-                    res.add(cur.val);
-                    cur = cur.right;
+                    cur = stack.pop();  //  如果右子节点为空则从栈中弹出元素
+                    res.add(cur.val);  // 弹出的元素就是要处理的元素，加入结果列表中
+                    cur = cur.right;  // 指向右子节点
                 }
             }
             return res;
