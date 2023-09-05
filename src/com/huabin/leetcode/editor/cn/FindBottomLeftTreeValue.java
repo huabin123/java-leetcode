@@ -45,7 +45,8 @@ public class FindBottomLeftTreeValue{
     public static void main(String[] args) {
         Solution solution = new FindBottomLeftTreeValue().new Solution();
         TreeNode init = TreeNode.init();
-        solution.findBottomLeftValue(init);
+        System.out.println(solution.findBottomLeftValue(init));
+        System.out.println(solution.findBottomLeftValue02(init));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
     /**
@@ -86,6 +87,34 @@ public class FindBottomLeftTreeValue{
                 }
             }
             return res;
+        }
+
+        // 递归，最底层最左边的节点不一定是左节点，只要优先遍历左节点就可以，找到深度最大的叶子节点
+        int maxDepth = -1;  // 已访问过的最大深度
+        int res = 0;
+        public int findBottomLeftValue02(TreeNode root) {
+            this.findLeftValue(root, 0);
+            return res;
+        }
+
+        private void findLeftValue(TreeNode root, int depth) {
+            if (root.left == null && root.right == null) {
+                if (depth > maxDepth) {
+                    maxDepth = depth;
+                    res = root.val;
+                }
+                return;
+            }
+            if (root.left != null) {
+                depth++;
+                findLeftValue(root.left, depth);
+                depth--;
+            }
+            if (root.right != null) {
+                depth++;
+                findLeftValue(root.right, depth);
+                depth--;
+            }
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
