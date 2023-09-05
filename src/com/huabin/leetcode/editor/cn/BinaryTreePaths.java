@@ -38,6 +38,9 @@ import java.util.List;
 public class BinaryTreePaths{
     public static void main(String[] args) {
         Solution solution = new BinaryTreePaths().new Solution();
+        TreeNode root = TreeNode.init();
+        System.out.println(solution.binaryTreePaths(root));
+        System.out.println(solution.binaryTreePaths02(root));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
     /**
@@ -60,11 +63,11 @@ public class BinaryTreePaths{
          * 递归法
          */
         public List<String> binaryTreePaths(TreeNode root) {
-            List<String> res = new ArrayList<>();// 存最终的结果
+            List<String> res = new ArrayList<>();  // 存最终的结果
             if (root == null) {
                 return res;
             }
-            List<Integer> paths = new ArrayList<>();// 作为结果中的路径
+            List<Integer> paths = new ArrayList<>();  // 作为结果中的路径
             traversal(root, paths, res);
             return res;
         }
@@ -90,6 +93,36 @@ public class BinaryTreePaths{
             if (root.right != null) { // 右
                 traversal(root.right, paths, res);
                 paths.remove(paths.size() - 1);// 回溯
+            }
+        }
+
+
+        // 自己写一遍
+        private List<String> binaryTreePaths02(TreeNode root){
+            List<String> res = new ArrayList<>();
+            List<Integer> paths = new ArrayList<>();
+            this.traversal02(root, paths, res);
+            return res;
+        }
+
+        private void traversal02(TreeNode root, List<Integer> paths, List<String> res) {
+            paths.add(root.val);  // 中，不要忘了这一步
+            if (root.left == null && root.right == null) {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < paths.size() - 1; i++) {
+                    sb.append(paths.get(i)).append("->");
+                }
+                sb.append(paths.get(paths.size() - 1));
+                res.add(sb.toString());
+                return;
+            }
+            if (root.left != null) {
+                traversal02(root.left, paths, res);
+                paths.remove(paths.size() - 1);
+            }
+            if (root.right != null) {
+                traversal02(root.right, paths, res);
+                paths.remove(paths.size() - 1);
             }
         }
     }
