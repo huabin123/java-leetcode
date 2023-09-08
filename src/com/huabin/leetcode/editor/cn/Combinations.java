@@ -51,7 +51,7 @@ public class Combinations{
         List<List<Integer>> res = new ArrayList<>();
         LinkedList<Integer> path = new LinkedList<>();
         public List<List<Integer>> combine(int n, int k) {
-            this.backTracking(n, k, 1);
+            this.backTracking1(n, k, 1);
             return res;
         }
 
@@ -61,6 +61,19 @@ public class Combinations{
                 return;
             }
             for (int i = startIndex; i <= n; i++) {  // 这里是小于等于 startIndex是从1开始的
+                path.add(i);
+                backTracking(n, k, i + 1);
+                path.removeLast();  // 回溯
+            }
+        }
+
+        // 剪枝优化
+        private void backTracking1(int n, int k, int startIndex) {
+            if (path.size() == k) {
+                res.add(new ArrayList<>(path));
+                return;
+            }
+            for (int i = startIndex; i <= n - (k - path.size()) + 1; i++) {  // 这里是小于等于 startIndex是从1开始的
                 path.add(i);
                 backTracking(n, k, i + 1);
                 path.removeLast();  // 回溯
