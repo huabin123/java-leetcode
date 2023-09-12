@@ -69,7 +69,7 @@ public class SubsetsIi{
             }
             for (int i = startIndex; i < nums.length; i++) {
                 // used[i - 1] == true，说明同一树枝candidates[i - 1]使用过
-                // used[i - 1] == false，说明同一树层candidates[i - 1]使用过
+                // used[i - 1] == false，说明同一树层candidates[i - 1]使用过，因为上一个是被回溯回来的，执行了used[i] = false
                 // 而我们要对同一树层使用过的元素进行跳过
                 if (i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) {
                     continue;
