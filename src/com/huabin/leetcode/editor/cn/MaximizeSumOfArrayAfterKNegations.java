@@ -58,6 +58,7 @@ public class MaximizeSumOfArrayAfterKNegations{
     }
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        // 贪心
         public int largestSumAfterKNegations(int[] nums, int K) {
             // 第一步：将数组按照绝对值大小从大到小排序，注意要按照绝对值的大小
             nums = IntStream.of(nums)
