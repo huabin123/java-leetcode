@@ -48,12 +48,13 @@ package com.huabin.leetcode.editor.cn;
 public class FibonacciNumber{
     public static void main(String[] args) {
         Solution solution = new FibonacciNumber().new Solution();
+        System.out.println(solution.fib(10));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int fib(int n) {
             if (n <= 1) return n;
-            int[] dp = new int[n + 1];
+            int[] dp = new int[n + 1];  // 这里要是n+1，因为有dp[0]
             dp[0] = 0;
             dp[1] = 1;
             for (int index = 2; index <= n; index++) {
