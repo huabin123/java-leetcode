@@ -41,37 +41,64 @@ public class PartitionEqualSubsetSum{
         System.out.println(solution.canPartition(nums));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
-    // 回溯法，会超时
+//    // 回溯法，会超时
+//    class Solution {
+//        public boolean canPartition(int[] nums) {
+//            int sum = 0;
+//            for (int num : nums) {
+//                sum += num;
+//            }
+//
+//            // 如果数组元素和为奇数，无法分割成两个相等的子集
+//            if (sum % 2 != 0) {
+//                return false;
+//            }
+//
+//            // 排序数组，以便提前剪枝
+//            Arrays.sort(nums);
+//
+//            // 回溯搜索
+//            return backtrack(nums, nums.length - 1, sum / 2, 0);
+//        }
+//
+//        private boolean backtrack(int[] nums, int index, int target, int currentSum) {
+//            if (currentSum == target) {
+//                return true;
+//            }
+//            if (currentSum > target || index < 0) {
+//                return false;
+//            }
+//
+//            // 尝试将当前元素加入子集1或子集2
+//            return backtrack(nums, index - 1, target, currentSum) ||
+//                    backtrack(nums, index - 1, target, currentSum + nums[index]);
+//        }
+//    }
+
+    // 动态规划
     class Solution {
         public boolean canPartition(int[] nums) {
+            if (nums == null || nums.length == 0) return false;
+            int n = nums.length;
             int sum = 0;
             for (int num : nums) {
                 sum += num;
             }
+            //总和为奇数，不能平分
+            if (sum % 2 != 0) return false;
+            int target = sum / 2;
+            int[] dp = new int[target + 1];
+            for (int i = 0; i < n; i++) {
+                for (int j = target; j >= nums[i]; j--) {
+                    //物品 i 的重量是 nums[i]，其价值也是 nums[i]
+                    dp[j] = Math.max(dp[j], dp[j - nums[i]] + nums[i]);
+                }
 
-            // 如果数组元素和为奇数，无法分割成两个相等的子集
-            if (sum % 2 != 0) {
-                return false;
+                //剪枝一下，每一次完成內層的for-loop，立即檢查是否dp[target] == target，優化時間複雜度（26ms -> 20ms）
+                if (dp[target] == target)
+                    return true;
             }
-
-            // 排序数组，以便提前剪枝
-            Arrays.sort(nums);
-
-            // 回溯搜索
-            return backtrack(nums, nums.length - 1, sum / 2, 0);
-        }
-
-        private boolean backtrack(int[] nums, int index, int target, int currentSum) {
-            if (currentSum == target) {
-                return true;
-            }
-            if (currentSum > target || index < 0) {
-                return false;
-            }
-
-            // 尝试将当前元素加入子集1或子集2
-            return backtrack(nums, index - 1, target, currentSum) ||
-                    backtrack(nums, index - 1, target, currentSum + nums[index]);
+            return dp[target] == target;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
