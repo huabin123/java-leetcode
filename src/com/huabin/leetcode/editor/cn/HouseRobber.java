@@ -45,7 +45,9 @@ public class HouseRobber{
          * 如果偷第i房间：
          * 那么dp[i] = dp[i - 2] + nums[i] ，即：第i-1房一定是不考虑的，找出 下标i-2（包括i-2）以内的房屋，
          * 最多可以偷窃的金额为dp[i-2] 加上第i房间偷到的钱。
-         * 如果不偷第i房间：那么dp[i] = dp[i - 1]，即考 虑i-1房
+         *
+         * 如果不偷第i房间：
+         * 那么dp[i] = dp[i - 1]，即考 虑i-1房
          */
         public int rob(int[] nums) {
             if (nums == null || nums.length == 0) return 0;
@@ -53,7 +55,7 @@ public class HouseRobber{
 
             int[] dp = new int[nums.length];  // dp[i]：考虑下标i（包括i）以内的房屋，最多可以偷窃的金额为dp[i]。
             dp[0] = nums[0];
-            dp[1] = Math.max(dp[0], nums[1]);
+            dp[1] = Math.max(nums[0], nums[1]);
             for (int i = 2; i < nums.length; i++) {
                 dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[i]);
             }
