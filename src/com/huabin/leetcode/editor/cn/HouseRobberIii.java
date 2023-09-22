@@ -68,6 +68,14 @@ public class HouseRobberIii{
      * }
      */
     class Solution {
+        /**
+         *     状态标记递归
+         *     不偷：Max(左孩子不偷，左孩子偷) + Max(又孩子不偷，右孩子偷)
+         *     root[0] = Math.max(rob(root.left)[0], rob(root.left)[1]) +
+         *     Math.max(rob(root.right)[0], rob(root.right)[1])
+         *     偷：左孩子不偷+ 右孩子不偷 + 当前节点偷
+         *     root[1] = rob(root.left)[0] + rob(root.right)[0] + root.val;
+         */
         public int rob(TreeNode root) {
             int[] res = robAction(root);
             return Math.max(res[0], res[1]);
