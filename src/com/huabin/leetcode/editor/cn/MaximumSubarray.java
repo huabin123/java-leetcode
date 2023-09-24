@@ -49,7 +49,7 @@ public class MaximumSubarray{
     }
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        public int maxSubArray(int[] nums) {
+        public int maxSubArray1(int[] nums) {
             // 思路一：贪心解法。遇到负数肯定会让和变小，重新计数，记住最大值就行
             if (nums.length == 1) {
                 return nums[0];
@@ -64,6 +64,22 @@ public class MaximumSubarray{
                 }
             }
             return sum;
+        }
+
+        // 贪心解法
+        public int maxSubArray(int[] nums) {
+            if (nums.length == 0) {
+                return 0;
+            }
+
+            int res = nums[0];
+            int[] dp = new int[nums.length];
+            dp[0] = nums[0];
+            for (int i = 1; i < nums.length; i++) {
+                dp[i] = Math.max(dp[i - 1] + nums[i], nums[i]);
+                res = Math.max(res, dp[i]);
+            }
+            return res;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
