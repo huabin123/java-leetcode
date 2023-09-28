@@ -52,23 +52,56 @@ import java.util.Set;
 public class MakingALargeIsland{
     public static void main(String[] args) {
         Solution solution = new MakingALargeIsland().new Solution();
+        int[][] grid1 = {
+                {1, 1, 0, 0, 0},
+                {1, 1, 0, 0, 0},
+                {0, 0, 0, 1, 1},
+                {0, 0, 0, 1, 1}
+        };
+        System.out.println(solution.largestIsland(grid1)); // 应该返回 5
+
+//        int[][] grid2 = {
+//                {1, 0, 1},
+//                {0, 0, 1},
+//                {1, 1, 0}
+//        };
+//        System.out.println(solution.largestIsland(grid2)); // 应该返回 5
+//
+//        int[][] grid3 = {
+//                {1, 1},
+//                {1, 1}
+//        };
+//        System.out.println(solution.largestIsland(grid3)); // 应该返回 4
+//
+//        int[][] grid4 = {
+//                {0, 0},
+//                {0, 0}
+//        };
+//        System.out.println(solution.largestIsland(grid4)); // 应该返回 1
     }
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        /**
+         * 思路：
+         * 先把所有岛屿标记出来
+         * 再遍历每一个0的方格，并统计其相邻岛屿面积的和，最后取一个最大值。
+         * @param grid
+         * @return
+         */
         public int largestIsland(int[][] grid) {
             int n = grid.length;
             int maxIslandSize = 0;
             int currentIslandSize = 0;
 
-            // 使用DFS标记每个岛屿，并记录岛屿的大小
+            // 使用DFS标记每个岛屿，并记录岛屿的大小，key：岛屿编号，value：岛屿面积
             Map<Integer, Integer> islandSizes = new HashMap<>();
-            int islandId = 2; // 1表示海洋，2及以上表示不同的岛屿
+            int islandId = 2; // 1表示海洋，2及以上表示不同的岛屿，岛屿的编号，是什么无所谓，不重复就行
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
                     if (grid[i][j] == 1) {
-                        currentIslandSize = dfs(grid, i, j, islandId);
+                        currentIslandSize = dfs(grid, i, j, islandId);  // 注意这里会传入岛屿编号，会把一整块原本为1的岛屿编号成islandId，这样在下面就能根据编号获取面积
                         islandSizes.put(islandId, currentIslandSize);
-                        maxIslandSize = Math.max(maxIslandSize, currentIslandSize);
+                        maxIslandSize = Math.max(maxIslandSize, currentIslandSize);  // 没有这一行当全部是1的时候会有问题
                         islandId++;
                     }
                 }
