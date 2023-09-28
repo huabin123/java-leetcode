@@ -121,14 +121,14 @@ public class NumberOfIslands{
     class Solution {
 
         boolean[][] visited;
-        int[][] move = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        int[][] move = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};  // 定义四个方向
 
         public int numIslands(char[][] grid) {
             int res = 0;
             visited = new boolean[grid.length][grid[0].length];
-            for (int i = 0; i < grid.length; i++) {
-                for (int j = 0; j < grid[0].length; j++) {
-                    if (!visited[i][j] && grid[i][j] == '1') {
+            for (int i = 0; i < grid.length; i++) {  // i是行
+                for (int j = 0; j < grid[0].length; j++) {  // j是列
+                    if (!visited[i][j] && grid[i][j] == '1') {  // 广度搜索使用队列，没有递归，这里其实就是终止条件
                         bfs(grid, i, j);
                         res++;
                     }
@@ -137,22 +137,22 @@ public class NumberOfIslands{
             return res;
         }
 
-        //将这片岛屿上的所有陆地都访问到
-        public void bfs(char[][] grid, int y, int x) {
+        // 将这片岛屿上的所有陆地都访问到
+        public void bfs(char[][] grid, int row, int col) {
             Deque<int[]> queue = new ArrayDeque<>();
-            queue.offer(new int[]{y, x});
-            visited[y][x] = true;
-            while (!queue.isEmpty()) {
+            queue.offer(new int[]{row, col});  // 起始节点加入队列
+            visited[row][col] = true;  // 只要加入队列，立刻标记为访问过的节点
+            while (!queue.isEmpty()) {  // 广度搜索队列里的节点
                 int[] cur = queue.poll();
-                int m = cur[0];
-                int n = cur[1];
-                for (int i = 0; i < 4; i++) {
-                    int nexty = m + move[i][0];
-                    int nextx = n + move[i][1];
+                int r = cur[0];
+                int c = cur[1];
+                for (int i = 0; i < 4; i++) {  // 开始向当前节点的四个方向左右上下去遍历
+                    int nexty = r + move[i][0];
+                    int nextx = c + move[i][1];
                     if (nextx < 0 || nexty == grid.length || nexty < 0 || nextx == grid[0].length) continue;
                     if (!visited[nexty][nextx] && grid[nexty][nextx] == '1') {
                         queue.offer(new int[]{nexty, nextx});
-                        visited[nexty][nextx] = true; //只要加入队列就标记为访问
+                        visited[nexty][nextx] = true; // 只要加入队列就标记为访问
                     }
                 }
             }
