@@ -37,6 +37,29 @@ public class BinarySearch{
     }
 
 //    //leetcode submit region begin(Prohibit modification and deletion)
+    // 20250608
+    class Solution {
+        public int search(int[] nums, int target) {
+            int left = 0;
+            int right = nums.length - 1;
+            while (left <= right) {
+                int mid = left + ((right - left) >> 1);
+                System.out.println("mid:" + mid);
+                System.out.println("left:" + left);
+                System.out.println("right:" + right);
+                System.out.println("================");
+                if (nums[mid] == target) {
+                    return mid;
+                } else if (nums[mid] > target) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            }
+            return -1;
+        }
+    }
+
 //    class Solution {
 //        /**
 //         * 存在返回下标，不存在返回-1
@@ -65,30 +88,31 @@ public class BinarySearch{
 //    //leetcode submit region end(Prohibit modification and deletion)
 
 
-    class Solution {
-        public int search(int[] nums, int target) {
-            int len = nums.length;
-            if (len == 0) {
-                return -1;
-            }
-            if (len == 1) {
-                if (nums[0] == target) return 0;
-                else return -1;
-            }
-            int l = 0;
-            int r = len - 1;
-            int mid;
-            while (r >= l) {
-                mid = getMid(l, r);
-                if (nums[mid] == target) return mid;
-                else if (nums[mid] > target) r = mid - 1;
-                else l = mid + 1;
-            }
-            return -1;
-        }
+//    class Solution {
+//        public int search(int[] nums, int target) {
+//            int len = nums.length;
+//            if (len == 0) {
+//                return -1;
+//            }
+//            if (len == 1) {
+//                if (nums[0] == target) return 0;
+//                else return -1;
+//            }
+//            int l = 0;
+//            int r = len - 1;
+//            int mid;
+//            while (r >= l) {
+//                mid = getMid(l, r);
+//                if (nums[mid] == target) return mid;
+//                else if (nums[mid] > target) r = mid - 1;
+//                else l = mid + 1;
+//            }
+//            return -1;
+//        }
+//
+//        private int getMid(int l, int r) {
+//            return (r + l) / 2;
+//        }
+//    }
 
-        private int getMid(int l, int r) {
-            return (r + l) / 2;
-        }
-    }
 }

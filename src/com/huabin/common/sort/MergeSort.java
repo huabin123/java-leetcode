@@ -8,7 +8,7 @@ package com.huabin.common.sort;
 public class MergeSort {
 
     public static void main(String[] args) {
-        int[] arr = {12, 11, 13, 5, 6, 7};
+        int[] arr = {10, 7, 5, 8, 3, 11, 1, 6};
         int n = arr.length;
 
         mergeSort(arr, 0, n - 1);
@@ -28,7 +28,7 @@ public class MergeSort {
         mergeSort(arr, mid+1, r);
         merge(arr, l, mid, r);
     }
-
+    // {10, 7, 5, 8, 3, 11, 1, 6}
     private static void merge(int[] arr, int l, int m, int r) {
         int[] help = new int[r - l + 1];
         int i = 0;

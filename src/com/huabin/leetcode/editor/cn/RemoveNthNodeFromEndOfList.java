@@ -53,6 +53,12 @@ import java.util.Stack;
 public class RemoveNthNodeFromEndOfList{
     public static void main(String[] args) {
         Solution solution = new RemoveNthNodeFromEndOfList().new Solution();
+        ListNode node = solution.removeNthFromEnd(ListNode.init(), 2);
+        while (node != null){
+            System.out.println(node.val);
+            node = node.next;
+        }
+
     }
     //leetcode submit region begin(Prohibit modification and deletion)
     /**

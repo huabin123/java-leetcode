@@ -13,26 +13,40 @@ public class Code03_InsertSort {
         arr[j] = temp;
     }
 
-    public static int[] sort(int[] array){
-        // 处理边界条件
-        if (array.length == 0 || array.length == 1) {
+//    public static int[] sort(int[] array){
+//        // 处理边界条件
+//        if (array.length == 0 || array.length == 1) {
+//            return array;
+//        }
+//        // 保证0-1，0-2，0-3。。。0-n位置有序
+//        for (int end = 1;  end < array.length; end++) {
+//            int newNumIndex = end;
+//            while (newNumIndex-1>=0 && array[newNumIndex-1]>array[newNumIndex]){
+//                swap(array,newNumIndex-1,newNumIndex);
+//                newNumIndex--;
+//            }
+//        }
+//        return array;
+//    }
+
+    public static void main(String[] args) {
+        int[] array = {3, 1, 4, 10, 6, 3, 1, 8, 9, 5, 3, 0};
+        for (int j : sort(array)) {
+            System.out.print(j + " ");
+        }
+    }
+
+    public static int[] sort(int[] array) {
+        if (array.length <= 1) {
             return array;
         }
-        // 保证0-1，0-2，0-3。。。0-n位置有序
-        for (int end = 1;  end < array.length; end++) {
-            int newNumIndex = end;
-            while (newNumIndex-1>=0 && array[newNumIndex-1]>array[newNumIndex]){
-                swap(array,newNumIndex-1,newNumIndex);
+        for (int i = 1; i < array.length; i++) {
+            int newNumIndex = i;
+            while (newNumIndex - 1 >= 0 && array[newNumIndex - 1] > array[newNumIndex]){
+                swap(array, newNumIndex - 1, newNumIndex);
                 newNumIndex--;
             }
         }
         return array;
-    }
-
-    public static void main(String[] args) {
-        int[] array = {3, 1, 4, 10, 6, 3, 1, 8, 9, 5, 3};
-        for (int j : sort(array)) {
-            System.out.print(j + " ");
-        }
     }
 }

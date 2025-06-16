@@ -52,23 +52,29 @@ package com.huabin.leetcode.editor.cn;
 public class MinimumSizeSubarraySum{
     public static void main(String[] args) {
         Solution solution = new MinimumSizeSubarraySum().new Solution();
-        System.out.println(solution.minSubArrayLen(13, new int[]{2, 3, 1, 2, 4, 3}));
+        System.out.println(solution.minSubArrayLen(7, new int[]{2, 3, 1, 2, 4, 3}));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int minSubArrayLen(int target, int[] nums) {
-            int slow = 0, sum=0;
-            int result = Integer.MAX_VALUE;
-            for (int fast = 0; fast < nums.length; fast++) {
-                sum += nums[fast];
-                while (sum >= target) {
-                    result = Math.min(result, fast - slow + 1);
-                    sum -= nums[slow++];  // 这一句是核心中的核心，动态的改变慢指针的位置
-                }
+            int n = nums.length;
+            if(n == 0){
+                return 0;
             }
-            return result == Integer.MAX_VALUE ? 0 : result;
+            int l = 0, r=0, sum = 0, res = Integer.MAX_VALUE;
+            // 这里有个技巧就是把res定义成最大的数，这样就省去了定义一个flag的步骤
+            while(r < n){  // 终止条件为右指针到达末尾
+                sum += nums[r];
+                while(sum >= target){
+                    res = Math.min(res, r - l + 1);
+                    sum -= nums[l];
+                    l++;
+                }
+                r++;
+            }
+            return res == Integer.MAX_VALUE ? 0 : res;
+
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
-
 }

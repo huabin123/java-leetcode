@@ -65,24 +65,64 @@ package com.huabin.leetcode.editor.cn;
 public class RemoveElement{
     public static void main(String[] args) {
         Solution solution = new RemoveElement().new Solution();
-        System.out.println(solution.removeElement(new int[]{3, 2, 2, 3}, 3));
+        System.out.println(solution.removeElement(new int[]{0, 1, 2, 2, 3, 0, 4, 2}, 2));
     }
-//    //leetcode submit region begin(Prohibit modification and deletion)
-//    class Solution {
-//
-//        public int removeElement(int[] nums, int val) {
+    //leetcode submit region begin(Prohibit modification and deletion)
+
+    // 双指针解法
+    class Solution {
+        /**
+         * 注意题目说了不需要考虑数组中超出新长度后面的元素，所以只要保证数组的前面是需要的元素就行，因此遍历数组，只要num != value
+         * 就nums[ans] = num，如果等于就跳过了。但是这个属于数学解法。
+         * 好吧，其实这就是双指针解法，ans就是慢指针。。。。。
+         * @param nums
+         * @param val
+         * @return
+         */
+        public int removeElement(int[] nums, int val) {
+//            // 这里先定义出结果，不使用fori循环
 //            int ans = 0;
-//            for(int num: nums) {
-//                if(num != val) {
+//            for(int num : nums){
+//                if(num != val){  // 这里是num，不是nums[ans]
 //                    nums[ans] = num;
 //                    ans++;
 //                }
 //            }
 //            return ans;
-//        }
-//
-//    }
-//    //leetcode submit region end(Prohibit modification and deletion)
+
+//            // 改成这样就是很明显的双指针了，同向双指针
+//            int slowIndex = 0;
+//            for(int fastIndex = 0; fastIndex<nums.length; fastIndex++){
+//                if(nums[fastIndex] != val){
+//                    nums[slowIndex++] = nums[fastIndex];
+//                }
+//            }
+//            return slowIndex;
+
+            // 试一下相向双指针，这样可以移动最少的元素
+            // 做不出来  0, 1, 2, 2, 3, 0, 4, 2 val = 2
+            int leftIndex = 0;
+            int rightIndex = nums.length - 1;
+            while (leftIndex <= rightIndex) {
+                // 找左边等于val的元素
+                while (leftIndex <= rightIndex && nums[leftIndex] != val) {
+                    ++leftIndex;
+                }
+                // 找右边不等于val的元素
+                while (leftIndex <= rightIndex && nums[rightIndex] == val) {
+                    --rightIndex;
+                }
+                // 将右边不等于val的元素覆盖左边等于val的元素
+                if (leftIndex < rightIndex) {
+                    nums[leftIndex++] = nums[rightIndex--];
+                }
+            }
+            return leftIndex; // leftIndex⼀定指向了最终数组末尾的下⼀个元素
+
+        }
+
+    }
+
 
 //    class Solution {
 //        public int removeElement(int[] nums, int val) {
@@ -125,18 +165,19 @@ public class RemoveElement{
 //    }
 
 
-    class Solution {
-        public int removeElement(int[] nums, int val) {
-            // 双指针法，快指针作为寻找新元素的指针需要遍历所有元素，慢指针指向新数组下标位置
-            int slowIndex = 0;
-            for (int fastIndex = 0; fastIndex < nums.length; fastIndex++) {
-                if (nums[fastIndex] != val) {
-                    nums[slowIndex] = nums[fastIndex];
-                    slowIndex++;
-                }
-            }
-            return slowIndex;
-        }
-    }
+//    class Solution {
+//        public int removeElement(int[] nums, int val) {
+//            // 双指针法，快指针作为寻找新元素的指针需要遍历所有元素，慢指针指向新数组下标位置
+//            int slowIndex = 0;
+//            for (int fastIndex = 0; fastIndex < nums.length; fastIndex++) {
+//                if (nums[fastIndex] != val) {
+//                    nums[slowIndex] = nums[fastIndex];
+//                    slowIndex++;
+//                }
+//            }
+//            return slowIndex;
+//        }
+//    }
+    //leetcode submit region end(Prohibit modification and deletion)
 
 }

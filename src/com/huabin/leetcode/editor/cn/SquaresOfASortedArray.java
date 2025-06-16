@@ -48,6 +48,10 @@ public class SquaresOfASortedArray{
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[] sortedSquares(int[] nums) {
+            // 20250612
+            // 使用头尾指针
+
+
             int l = 0;
             int r = nums.length - 1;
             int[] result = new int[nums.length];

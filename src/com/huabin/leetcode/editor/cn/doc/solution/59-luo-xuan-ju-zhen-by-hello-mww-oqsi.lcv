@@ -1,0 +1,48 @@
+### 解题思路
+
+此处撰写解题思路
+
+### 代码
+
+* java
+
+```java
+class Solution {
+    public int[][] generateMatrix(int n) {
+int[][] nums=new int[n][n];
+
+        int I[]={0,1,0,-1};
+        int J[]={1,0,-1,0};
+
+        int Iindex=0;
+        int Jindex=0;
+        int direction=0;
+        for(int i=1;i<=n*n;i++){
+            nums[Iindex][Jindex]=i;
+
+            if(i==n*n)
+                break;
+
+            while(true){
+                int iindex=Iindex+I[direction];
+                int jindex=Jindex+J[direction];
+
+                if(jindex>=0&&jindex<n&&iindex>=0&&iindex<n&&nums[iindex][jindex]==0) {
+                    Iindex=iindex;
+                    Jindex=jindex;
+                    break;
+                }
+                else{
+                    if(direction==3)
+                        direction=0;
+                    else
+                        direction++;
+                }
+            }
+        }
+
+        return nums;
+    }
+}
+```
+
