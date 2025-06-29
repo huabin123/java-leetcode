@@ -50,6 +50,11 @@ import java.util.HashMap;
 public class FourSumIi{
     public static void main(String[] args) {
         Solution solution = new FourSumIi().new Solution();
+        int[] nums1 = new int[]{1,2};
+        int[] nums2 = new int[]{-2,-1};
+        int[] nums3 = new int[]{-1,2};
+        int[] nums4 = new int[]{0,2};
+        System.out.println(solution.fourSumCount(nums1,nums2,nums3,nums4));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {

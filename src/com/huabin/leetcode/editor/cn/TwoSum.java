@@ -48,12 +48,17 @@
 
 package com.huabin.leetcode.editor.cn;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 
 public class TwoSum{
     public static void main(String[] args) {
         Solution solution = new TwoSum().new Solution();
+        int[] res = solution.twoSum(new int[]{3, 2, 4}, 6);
+        for (int i = 0; i < res.length; i++) {
+            System.out.println(res[i]);
+        }
     }
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
@@ -65,7 +70,7 @@ public class TwoSum{
             int num = 0;
             for (int i = 0; i < nums.length; i++) {
                 num = target - nums[i];
-                if (map.containsKey(num) && map.get(num) != i) {
+                if (map.containsKey(num) && map.get(num) != i) {  // map.get(num) != i注意这个条件
                     return new int[]{i, map.get(num)};
                 }
             }

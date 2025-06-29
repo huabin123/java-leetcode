@@ -49,6 +49,8 @@ import java.util.HashSet;
 public class HappyNumber{
     public static void main(String[] args) {
         Solution solution = new HappyNumber().new Solution();
+//        System.out.println(solution.isHappy(19));
+        System.out.println(solution.getNext(12345));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
